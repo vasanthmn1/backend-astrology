@@ -15,6 +15,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    isDoctor: {
+        type: Boolean,
+        default: false
+    },
+    notifaction: {
+        type: Array,
+        default: [],
+    },
+    seenotnotifaction: {
+        type: Array,
+        default: []
+    }
 },
     { timestamps: true }
 )
