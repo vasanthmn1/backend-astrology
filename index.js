@@ -5,6 +5,8 @@ const doyenv = require('dotenv').config()
 const port = process.env.PORT
 const DB = require('./config/ConntingDB')
 const userroutes = require('./routes/userRoutes')
+const applayUserRoute = require('./routes/applayUserRoute')
+
 const app = express()
 
 
@@ -25,6 +27,10 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use('/auth', userroutes)
+app.use('/user', applayUserRoute)
+
+// app.use('/auth', userroutes)
+// 
 
 
 
