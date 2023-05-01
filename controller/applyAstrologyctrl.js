@@ -13,19 +13,19 @@ const applyAstro = asyncCntrol(async (req, res) => {
 
         const notifaction = admin.notifaction
         notifaction.push({
-            type: "apply-admin",
+            type: "apply-doctor-request",
             message: `${newApplay.name} He Applayed  `,
             data: {
                 adminId: newApplay._id,
                 name: newApplay.name,
-                onclickPath: '/admin'
+                onclickPath: '/user/apply'
             }
         })
         await userModel.findByIdAndUpdate(admin._id, {
             notifaction
         })
         res.status(200).json({
-            message: "apply Sucess"
+            message: "apply Suceess"
         })
         // await admin.findByIdAndUpdate({
         //     // admin._id,
@@ -42,7 +42,27 @@ const applyAstro = asyncCntrol(async (req, res) => {
     }
 })
 
+const getAllNotification = asyncCntrol(async (req, res) => {
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId })
 
+        const seenotifi = user.seenotnotifaction
+        const notification = user.notifaction
+        seenotifi.push(...notification)
+        user.notifaction = []
+        user.seenotnotifaction = notification
+
+        const updateuser = await user.save()
+
+        res.status(200).json({
+            message: sucess,
+            message: "all notification read",
+            data: updateuser
+        })
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 
 
@@ -50,5 +70,6 @@ const applyAstro = asyncCntrol(async (req, res) => {
 
 module.exports = {
     applyAstro,
+    getAllNotification
 
 }

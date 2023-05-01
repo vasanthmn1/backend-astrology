@@ -64,7 +64,14 @@ const loginUser = asyncCntrol(async (req, res) => {
     }
 })
 
+const getAdmin = asyncCntrol(async (req, res) => {
+    const user = await userModel.findOne({ isAdmin: true })
 
+
+    res.status(200).json({
+        user
+    })
+})
 
 
 
@@ -72,5 +79,6 @@ const loginUser = asyncCntrol(async (req, res) => {
 
 module.exports = {
     loginUser,
-    registerUser
+    registerUser,
+    getAdmin
 }
