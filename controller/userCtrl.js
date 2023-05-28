@@ -65,7 +65,7 @@ const loginUser = asyncCntrol(async (req, res) => {
 })
 
 const getAdmin = asyncCntrol(async (req, res) => {
-    const user = await userModel.findOne({ isAdmin: true })
+    const user = await userModel.findOne({ isAdmin: true }).select('-password')
 
 
     res.status(200).json({
