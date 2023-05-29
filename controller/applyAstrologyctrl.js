@@ -11,7 +11,8 @@ const applyAstro = asyncCntrol(async (req, res) => {
         const newApplay = await adminModel.create({ ...req.body, status: "pending" })
 
         const admin = await userModel.findOne({ isAdmin: true })
-        const user = await userModel.findOne({ email })
+        const user = await userModel.findOne({ email: newApplay.email })
+
         const notifaction = admin.notifaction
         notifaction.push({
             type: "apply-request",
@@ -27,7 +28,10 @@ const applyAstro = asyncCntrol(async (req, res) => {
                 onclickPath: '/user/apply'
             }
         })
-        console.log(user)
+        const usernoti = user.notifaction
+
+        usernoti.push(notifaction)
+        console.log(user.email)
         await userModel.findByIdAndUpdate(admin._id, {
             notifaction
         })
