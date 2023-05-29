@@ -3,15 +3,15 @@ const bcryptjs = require('bcryptjs');
 const userModel = require('../model/userModel');
 const jsonwebtoken = require('jsonwebtoken');
 const adminModel = require('../model/adminModel');
-const { response } = require('express');
+
 
 const applyAstro = asyncCntrol(async (req, res) => {
     try {
-
+        const { email } = req.body
         const newApplay = await adminModel.create({ ...req.body, status: "pending" })
 
         const admin = await userModel.findOne({ isAdmin: true })
-        const user = await userModel.findOne()
+        const user = await userModel.findOne({ email })
         const notifaction = admin.notifaction
         notifaction.push({
             type: "apply-request",
@@ -27,23 +27,15 @@ const applyAstro = asyncCntrol(async (req, res) => {
                 onclickPath: '/user/apply'
             }
         })
-
+        console.log(user)
         await userModel.findByIdAndUpdate(admin._id, {
             notifaction
         })
         res.status(200).json({
             message: "apply Suceess",
-
+            user
         })
-        // await admin.findByIdAndUpdate({
-        //     // admin._id,
-        //     // {notifaction}
-        // })
-        // if (!user) {
-        //     return res.status(400).json({
-        //         massage: "user Not Found"
-        //     })
-        // }
+
 
     } catch (error) {
         console.log(error);
