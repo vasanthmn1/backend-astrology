@@ -184,9 +184,7 @@ const delnotification = asyncCntrol(async (req, res) => {
         if (!newsa || !newsa.notifaction || !newsa.notifaction[userIndex]) {
             return res.status(404).json({ message: 'User not found or notification not available', userIndex });
         }
-        // console.log(newsa);
-        // [userIndex].data.status = 'Reject';
-        console.log(userIndex)
+
         newsa.notifaction[userIndex].data.status = 'Reject'
         console.log("hello", newsa.notifaction)
         await userModel.updateOne(
@@ -194,15 +192,6 @@ const delnotification = asyncCntrol(async (req, res) => {
             { $set: { notifaction: newsa.notifaction } }
         );
 
-        // if (newsa.notifaction[userIndex].data) {
-        //     newsa.notifaction[userIndex].data.status = 'Reject';
-        //     console.log('Updated status:', newsa.notifaction[userIndex].data.status);
-        // }
-
-        // await userModel.findOneAndUpdate(
-        //     { email: newApplay.email },
-        //     { $set: { notifaction: newsa.notifaction } }
-        // );
 
         const userApplay = await userModel.findOne({ email: newApplay.email });
 
@@ -217,7 +206,6 @@ const delnotification = asyncCntrol(async (req, res) => {
             message: "Notification deleted",
             deletedUser,
             userApplay,
-            userIndex
         });
 
 
