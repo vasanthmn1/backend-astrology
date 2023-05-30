@@ -73,6 +73,12 @@ const getAdmin = asyncCntrol(async (req, res) => {
     })
 })
 
+const getAllUser = asyncCntrol(async (req, res) => {
+    const user = await userModel.find().select('-password')
+    res.status(200).json({
+        user
+    })
+})
 
 
 
@@ -80,5 +86,6 @@ const getAdmin = asyncCntrol(async (req, res) => {
 module.exports = {
     loginUser,
     registerUser,
-    getAdmin
+    getAdmin,
+    getAllUser
 }
