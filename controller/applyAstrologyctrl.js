@@ -21,9 +21,11 @@ const applyAstro = asyncCntrol(async (req, res) => {
                 userId: newApply._id,
                 name: newApply.name,
                 email: newApply.email,
+                phone: newApply.phone,
                 address: newApply.address,
                 times: newApply.times,
                 date: newApply.date,
+                softDelete: newApply.softDelete,
                 status: newApply.status,
                 onclickPath: '/user/apply'
             }
@@ -37,7 +39,9 @@ const applyAstro = asyncCntrol(async (req, res) => {
                 userId: newApply._id,
                 name: newApply.name,
                 email: newApply.email,
+                phone: newApply.phone,
                 address: newApply.address,
+                softDelete: newApply.softDelete,
                 times: newApply.times,
                 date: newApply.date,
                 status: newApply.status,
@@ -166,16 +170,11 @@ const delnotification = asyncCntrol(async (req, res) => {
         const admin = await userModel.findOne({ isAdmin: true });
         const userId = req.params.id;
 
-
-
-
         const newApplay = await adminModel.findOneAndUpdate({ _id: userId }, { $set: { status: 'Reject' } }, { new: true });
         const newsa = await userModel.findOne({ email: newApplay.email });
 
-
         const userIndex = newsa.notifaction.findIndex(notification => String(notification.data.userId) === userId);
         const adminIndex = admin.notifaction.findIndex(notification => String(notification.data.userId) === userId);
-
 
         if (userIndex === -1) {
             return res.status(404).json({ message: 'User not found' });
@@ -217,10 +216,176 @@ const delnotification = asyncCntrol(async (req, res) => {
     }
 });
 
+const apporvednotification = asyncCntrol(async (req, res) => {
+    try {
+        const admin = await userModel.findOne({ isAdmin: true });
+        const userId = req.params.id;
+
+        const newApplay = await adminModel.findOneAndUpdate({ _id: userId }, { $set: { status: 'Appoverd' } }, { new: true });
+        const newsa = await userModel.findOne({ email: newApplay.email });
+
+        const userIndex = newsa.notifaction.findIndex(notification => String(notification.data.userId) === userId);
+        const adminIndex = admin.notifaction.findIndex(notification => String(notification.data.userId) === userId);
+
+        if (userIndex === -1) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+
+        if (!newsa || !newsa.notifaction || !newsa.notifaction[userIndex]) {
+            return res.status(404).json({ message: 'User not found or notification not available', userIndex });
+        }
+
+        if (!admin || !admin.notifaction || !admin.notifaction[adminIndex]) {
+            return res.status(404).json({ message: 'admin not found or notification not available', adminIndex });
+        }
+
+        admin.notifaction[adminIndex].data.status = 'Appoverd'
+        await userModel.updateOne(
+            { _id: admin._id },
+            { $set: { notifaction: admin.notifaction } }
+
+        );
+        console.log(admin.notifaction[adminIndex].data.status)
+
+
+        newsa.notifaction[userIndex].data.status = 'Appoverd'
+        await userModel.updateOne(
+            { _id: newsa._id },
+            { $set: { notifaction: newsa.notifaction } }
+        );
+
+
+        const userApplay = await userModel.findOne({ email: newApplay.email });
+
+        // if (!admin.notifaction) {
+        //     admin.notifaction = [];
+        // }
+
+        // const deletedUser = admin.notifaction.splice(adminIndex, 1);
+        // await admin.save();
+
+        res.status(200).json({
+            message: "Notification appoverd",
+            userApplay,
+            userIndex,
+            admin
+        });
+
+
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
+// 
+
+const userdelnotification = asyncCntrol(async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const newApplay = await adminModel.findOneAndUpdate({ _id: userId }, { $set: { softDelete: true } }, { new: true });
+        const newsa = await userModel.findOne({ email: newApplay.email });
+
+        const userIndex = newsa.notifaction.findIndex(notification => String(notification.data.userId) === userId);
+
+        if (userIndex === -1) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (!newsa || !newsa.notifaction || !newsa.notifaction[userIndex]) {
+            return res.status(404).json({ message: 'User not found or notification not available', userIndex });
+        }
+
+        newsa.notifaction[userIndex].data.softDelete = true
+        await userModel.updateOne(
+            { _id: newsa._id },
+            { $set: { notifaction: newsa.notifaction } }
+        );
+
+
+        const userApplay = await userModel.findOne({ email: newApplay.email });
+
+
+        res.status(200).json({
+            message: "Notification appoverd",
+            userApplay,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+const getuserall = asyncCntrol(async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const newApplay = await userModel.find();
+        const findemail = await userModel.findOne({ _id: userId });
+
+        if (!findemail) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // const userIndex = findemail.notifaction.filter(notification => String(notification.data.softDelete) === userId);
+        const filteredData = findemail.filter(user => user.notifaction.some(notification => notification.data.softDelete === true));
+        console.log(findemail);
+        // if (userIndex === -1) {
+        //     return res.status(404).json({ message: 'Notification not found' });
+        // }
+
+        // findemail.notifaction[userIndex].data.softDelete = true;
+        await filteredData.save();
+
+        const userApplay = await userModel.findOne({ email: newApplay.email });
+        res.status(200).json({
+            message: "Notification approved",
+            userApplay,
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
+
+
+
+
+
+
+// const newsa = await userModel.findOne({ email: newApplay.email });
+
+// const userIndex = newsa.notifaction.findIndex(notification => String(notification.data.userId) === userId);
+
+// if (userIndex === -1) {
+//     return res.status(404).json({ message: 'User not found' });
+// }
+
+// if (!newsa || !newsa.notifaction || !newsa.notifaction[userIndex]) {
+//     return res.status(404).json({ message: 'User not found or notification not available', userIndex });
+// }
+
+// newsa.notifaction[userIndex].data.softDelete = true
+// await userModel.updateOne(
+//     { _id: newsa._id },
+//     { $set: { notifaction: newsa.notifaction } }
+// );
+
+
+// const userApplay = await userModel.findOne({ email: newApplay.email });
+
+
 module.exports = {
     applyAstro,
     getAllNotification,
     delAllNotification,
-    delnotification
-
+    delnotification,
+    apporvednotification,
+    userdelnotification,
+    getuserall
 }  

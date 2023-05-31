@@ -20,6 +20,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    softDelete: {
+        type: Boolean,
+        default: false
+    },
     times: {
         type: Object,
         required: true

@@ -19,18 +19,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    isDoctor: {
-        type: Boolean,
-        default: false
-    },
+
     notifaction: {
         type: Array,
         default: [],
     },
-    seenotnotifaction: {
-        type: Array,
-        default: []
-    }
 },
     { timestamps: true }
 )
