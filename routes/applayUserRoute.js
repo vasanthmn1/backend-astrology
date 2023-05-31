@@ -8,7 +8,7 @@ const routes = express.Router()
 routes.post('/apply', applyAstro)
 routes.post('/readnoti', getAllNotification)
 routes.post('/deleteallnoti', delAllNotification)
-routes.delete('/notifications/:id', delnotification)
+routes.delete('/delnotifications/:id', delnotification)
 
 
 

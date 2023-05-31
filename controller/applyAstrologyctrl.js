@@ -174,6 +174,7 @@ const delnotification = asyncCntrol(async (req, res) => {
 
 
         const userIndex = newsa.notifaction.findIndex(notification => String(notification.data.userId) === userId);
+        const adminIndex = admin.notifaction.findIndex(notification => String(notification.data.userId) === userId);
 
 
         if (userIndex === -1) {
@@ -199,13 +200,14 @@ const delnotification = asyncCntrol(async (req, res) => {
             admin.notifaction = [];
         }
 
-        const deletedUser = admin.notifaction.splice(userIndex, 1);
+        const deletedUser = admin.notifaction.splice(adminIndex, 1);
         await admin.save();
 
         res.status(200).json({
             message: "Notification deleted",
             deletedUser,
             userApplay,
+            userIndex
         });
 
 
