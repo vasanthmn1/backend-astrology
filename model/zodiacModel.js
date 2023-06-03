@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const zodiaSchema = new mongoose.Schema({
-    zodia: {
+    title: {
         type: String,
         required: true
     },

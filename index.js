@@ -6,6 +6,8 @@ const port = process.env.PORT
 const DB = require('./config/ConntingDB')
 const userroutes = require('./routes/userRoutes')
 const applayUserRoute = require('./routes/applayUserRoute')
+const zodiacRoutes = require('./routes/zodiacRoutes')
+
 const multer = require('multer')
 const path = require('path')
 
@@ -44,6 +46,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
 app.use('/auth', userroutes)
 app.use('/user', applayUserRoute)
+app.use('/zodiac', zodiacRoutes)
+
 
 // app.use('/auth', userroutes)
 // 
