@@ -111,60 +111,6 @@ const delAllNotification = asyncCntrol(async (req, res) => {
     }
 })
 
-// const delnotification = asyncCntrol(async (req, res) => {
-//     try {
-
-//         // const admin = await userModel.findOne({ isAdmin: true })
-//         const admin = await userModel.findOne({ isAdmin: true });
-
-//         const userId = req.params.id;
-
-
-//         const userIndex = admin.notifaction.findIndex(notification => String(notification.data.userId) === userId);
-
-
-//         if (userIndex === -1) {
-//             return res.status(404).json({ message: 'User not found' });
-//         }
-
-//         const newApplay = await adminModel.findOneAndUpdate({ _id: userId }, { $set: { status: 'Reject' } }, { new: true });
-
-
-//         const newsa = await userModel.findOne({ email: newApplay.email })
-//         if (!newsa || !newsa.notifaction) {
-//             return res.status(404).json({ message: 'User not found or notification not available' });
-//         }
-
-//         await userModel.updateOne(
-//             { _id: newsa._id, 'notifaction.data.userId': userId },
-//             { $set: { 'notifaction.$.data.status': 'Reject' } }
-//         );
-
-//         const userApplay = await userModel.findOne({ email: newApplay.email });
-
-
-//         await userApplay.save();
-
-//         if (!admin.notifaction) {
-//             admin.notifaction = [];
-//         }
-
-
-
-//         const deletedUser = admin.notifaction.splice(userIndex, 1);
-//         await admin.save();
-//         // console.log(userApplay)
-
-
-//         res.status(200).json({
-//             message: "Notification deleted",
-//             deletedUser,
-//             userApplay
-//         });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })
 const delnotification = asyncCntrol(async (req, res) => {
     try {
         const admin = await userModel.findOne({ isAdmin: true });
@@ -336,7 +282,6 @@ const getuserall = asyncCntrol(async (req, res) => {
         });
         await findemail.save();
 
-        // const userApplay = await userModel.findOne({ email: findemail.email });
         res.status(200).json({
             message: "Notification approved",
             filteredData,
@@ -359,8 +304,6 @@ const delusersinglenotification = asyncCntrol(async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        console.log(userId)
-        // console.log(object)
 
         const notificationIndex = user.notifaction.findIndex(notification => String(notification.data.userId) === notificationId);
 
