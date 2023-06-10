@@ -6,8 +6,14 @@ const zodiaSchema = new mongoose.Schema({
         required: true
     },
     poto: {
-        type: String,
-        required: true
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
     },
     desc: {
         type: String,
