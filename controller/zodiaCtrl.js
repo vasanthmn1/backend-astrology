@@ -133,61 +133,159 @@ const delpost = asyncCntrol(async (req, res) => {
     }
 })
 
+// const editpost = async (req, res) => {
+//     try {
+//         const { title, poto, desc, date } = req.body;
+//         // const editPost = await zodiacModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+//         const editPost = await zodiacModel.findById(req.params.id)
+//         if (!editPost) {
+//             return res.status(404).json({ error: 'Post not found' });
+//         }
+//         let data = {
+//             title,
+//             desc,
+//             date,
+//             poto: editPost.poto
+//         }
+//         if (poto !== '') {
+//             const imgId = editPost.poto.public_id;
+
+//             if (imgId) {
+//                 await cloudinary.uploader.destroy(imgId)
+//             }
+//             try {
+//                 const newimg = await cloudinary.uploader.upload(poto, {
+//                     folder: 'astrologyZodiac'
+
+//                 })
+
+//                 data.poto = {
+//                     public_id: newimg.public_id,
+//                     url: newimg.url
+//                 }
+//             } catch (error) {
+//                 console.error("img", error);
+//                 res.status(400).json({ error: 'Failed to upload image to Cloudinary' });
+//                 return;
+//             }
+
+
+//         }
+
+//         const updateposts = await zodiacModel.findByIdAndUpdate(req.params.id, {
+//             title: data.title,
+//             desc: data.desc,
+//             date: data.date,
+//             poto: data.poto,
+//         }, { new: true })
+//         // if (!updatepost) {
+//         //     return res.status(404).json({ error: 'Post not found' });
+//         // }
+//         res.status(200).json(updateposts)
+//     } catch (error) {
+//         console.error(error);
+//         res.status(400).json({ error: 'An error occurred while editing the post' });
+//         throw new Error(error);
+//     }
+// }
+
 const editpost = async (req, res) => {
     try {
-        const { title, poto, desc, date } = req.body;
-        // const editPost = await zodiacModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        const editPost = await zodiacModel.findById(req.params.id)
-        if (!editPost) {
-            return res.status(404).json({ error: 'Post not found' });
-        }
+        const { title, desc, date } = req.body;
+        // const editPost = await zodiacModel.findById(req.params.id);
+        // if (!editPost) {
+        //     return res.status(404).json({ error: 'Post not found' });
+        // }
         let data = {
             title,
             desc,
             date,
-            poto
-        }
-        if (poto !== '') {
-            const imgId = editPost.poto.public_id;
+            // poto
+        };
+        // if (typeof poto === 'object' && poto !== null) {
+        //     const imgId = editPost.poto.public_id;
 
-            if (imgId) {
-                await cloudinary.uploader.destroy(imgId)
-            }
-            try {
-                const newimg = await cloudinary.uploader.upload(poto, {
-                    folder: 'astrologyZodiac'
+        //     if (imgId) {
+        //         await cloudinary.uploader.destroy(imgId);
+        //     }
+        //     try {
+        //         const newimg = await cloudinary.uploader.upload(poto.file, {
+        //             folder: 'astrologyZodiac'
+        //         });
 
-                })
+        //         data.poto = {
+        //             public_id: newimg.public_id,
+        //             url: newimg.url
+        //         };
+        //     } catch (error) {
+        //         console.error("img", error);
+        //         res.status(400).json({ error: 'Failed to upload image to Cloudinary' });
+        //         return;
+        //     }
+        // }
 
-                data.poto = {
-                    public_id: newimg.public_id,
-                    url: newimg.url
-                }
-            } catch (error) {
-                console.error("img", error);
-                res.status(400).json({ error: 'Failed to upload image to Cloudinary' });
-                return;
-            }
-
-
-        }
-
-        const updatepost = await zodiacModel.findByIdAndUpdate(req.params.id, {
+        const updateposts = await zodiacModel.findByIdAndUpdate(req.params.id, {
             title: data.title,
             desc: data.desc,
             date: data.date,
-            poto: data.poto,
-        }, { new: true })
-        if (!updatepost) {
-            return res.status(404).json({ error: 'Post not found' });
-        }
-        res.status(200).json(updatepost)
+            // poto: data.poto,
+        }, { new: true });
+
+        res.status(200).json(updateposts);
     } catch (error) {
         console.error(error);
         res.status(400).json({ error: 'An error occurred while editing the post' });
         throw new Error(error);
     }
+};
+
+const editpostimg = async (req, res) => {
+    try {
+        const { poto } = req.body;
+        const editPost = await zodiacModel.findById(req.params.id);
+        if (!editPost) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        let data = {
+            poto
+        };
+        if (typeof poto === 'object' && poto !== null) {
+            const imgId = editPost.poto.public_id;
+
+            if (imgId) {
+                await cloudinary.uploader.destroy(imgId);
+            }
+            try {
+                const newimg = await cloudinary.uploader.upload(poto.file, {
+                    folder: 'astrologyZodiac'
+                });
+
+                data.poto = {
+                    public_id: newimg.public_id,
+                    url: newimg.url
+                };
+            } catch (error) {
+                console.error("img", error);
+                res.status(400).json({ error: 'Failed to upload image to Cloudinary' });
+                return;
+            }
+        }
+
+        const updateimage = await zodiacModel.findByIdAndUpdate(req.params.id, {
+            poto: data.poto,
+        }, { new: true });
+
+        res.status(200).json(updateimage);
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: 'An error occurred while editing the post' });
+        throw new Error(error);
+    }
+
 }
+
+
+
 const getone = asyncCntrol(async (req, res) => {
     try {
         const getPost = await zodiacModel.findById(req.params.id)
@@ -202,5 +300,6 @@ module.exports = {
     getpost,
     delpost,
     editpost,
-    getone
+    getone,
+    editpostimg
 }
