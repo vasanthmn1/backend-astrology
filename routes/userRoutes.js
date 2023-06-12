@@ -10,6 +10,4 @@ routes.get('/getadmin', getAdmin)
 routes.get('/getall', getAllUser)
 
 
-
-
 module.exports = routes

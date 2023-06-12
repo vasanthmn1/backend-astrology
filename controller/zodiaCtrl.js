@@ -284,8 +284,6 @@ const editpostimg = async (req, res) => {
 
 }
 
-
-
 const getone = asyncCntrol(async (req, res) => {
     try {
         const getPost = await zodiacModel.findById(req.params.id)
