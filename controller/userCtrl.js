@@ -29,8 +29,6 @@ const registerUser = asyncCntrol(async (req, res) => {
             { _id: newUser.id, username, email }
         )
 
-
-
     } catch (error) {
         console.log(error.message);
     }
@@ -58,9 +56,14 @@ const loginUser = asyncCntrol(async (req, res) => {
                     token
                 }
             })
-        }
-    } catch (error) {
+        } else {
+            res.status(400).json("Password Wroung");
 
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: error.message });
     }
 })
 
