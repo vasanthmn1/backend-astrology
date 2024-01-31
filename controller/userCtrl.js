@@ -57,10 +57,10 @@ const loginUser = asyncCntrol(async (req, res) => {
                 }
             })
         } 
-        // else {
-        //     res.status(400).json("Password Wroung");
+        else {
+            res.status(400).json("Password Wroung");
 
-        // }
+        }
 
     } catch (error) {
         console.log(error);
