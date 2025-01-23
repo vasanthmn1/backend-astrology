@@ -6,7 +6,7 @@ import ValidateEnv from "./ValidateEnv";
 import { _utils } from "../lib/utils/_utils";
 
 
-let envPath = path.resolve("./env/.env.dev")
+let envPath = path.resolve(".env.dev")
 
 
 config({ path: resolve(__dirname, envPath) })

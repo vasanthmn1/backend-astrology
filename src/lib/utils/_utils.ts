@@ -3,12 +3,10 @@
 export let _utils = {
 
     isParseInt: (value: any): number => {
-        // if (typeof value === "number") {
-        //     return parseInt(_utils.trim(value))
-        // }
-        return parseInt(value)
-
-
+        if (typeof value === "number") {
+            return parseInt(_utils.trim(value.toString()))
+        }
+        return parseInt(_utils.trim(value))
     },
 
     parseBooleam: (boolValue: any) => {
@@ -21,11 +19,9 @@ export let _utils = {
     },
 
     trim: (value: string): string => {
-
         value = value || ""
-        value = value + ""
+        value = value + ''
         return value.trim()
-
     },
 
     isEmptyStrict: (input: any) => {
@@ -34,15 +30,6 @@ export let _utils = {
     },
 
     isEmpty: (input: any) => {
-        if (!input) {
-            return true
-        }
-
-        if (Array.isArray(input)) {
-            return input.length === 0
-        }
-
-
-        return (Object.keys(input).length === 0 && input.constructor === Object)
+        return input === undefined || input === null || input === '';
     },
 }
