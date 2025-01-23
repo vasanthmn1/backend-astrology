@@ -1,8 +1,10 @@
 import app from "../index";
+import _config from "../src/config/config";
 
 
+let port = _config.port
 
 
-app.listen(7000, () => {
-    console.log("Listion Port", 7000);
+app.listen(port, () => {
+    console.log("Listion Port", port);
 })
