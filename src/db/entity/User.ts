@@ -20,6 +20,6 @@ const userSchema = new mongoose.Schema<IUser>({
     updated_date: { type: String, required: true }
 
 });
-const user = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 
-export default user;
+export default User;

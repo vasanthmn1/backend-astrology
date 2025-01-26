@@ -3,14 +3,14 @@ import _config from "../../config/config";
 import { BusinessException } from "../../lib/helper/BusinessException";
 import { AccessPointEnum } from "../../enum/AccessPointEnum";
 import { JwtTokenAction } from "../token/JwtTokenAction";
-import { IAuhtUser } from "../../interface/auth/IAuthUser";
+import { IAuthUser } from "../../interface/auth/IAuthUser";
 
 
 export class AuthMiddleWareAction {
 
     jwtTokenAction = new JwtTokenAction()
 
-    public authaticate = async (req: Request, res: Response, next: NextFunction, accessPoint: AccessPointEnum) => {
+    public authenticate = async (req: Request, res: Response, next: NextFunction, accessPoint: AccessPointEnum) => {
 
         let token = req.headers.authenticate + "" || "";
         let timeZone = req.headers.tz || ""
@@ -40,7 +40,7 @@ export class AuthMiddleWareAction {
 
     private validatePrivateToken = async (res: Response, token: string, secret_key: string, next: NextFunction) => {
 
-        let decodedToken = await this.jwtTokenAction.verifyAndDecodedToken<IAuhtUser>(res, token, secret_key)
+        let decodedToken = await this.jwtTokenAction.verifyAndDecodedToken<IAuthUser>(res, token, secret_key)
 
         decodedToken.extra.timeZone = res.locals.tz
         res.locals.authUser = decodedToken

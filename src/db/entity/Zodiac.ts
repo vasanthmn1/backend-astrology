@@ -13,9 +13,10 @@ const zodiacSchema = new mongoose.Schema<IZodiac>({
     photo: photoSchema,
     description: { type: String },
 
-
+    created_date: { type: String, required: true },
+    updated_date: { type: String, required: true }
 
 })
 
-const zodiac = mongoose.model<IZodiac>('Zodiac', zodiacSchema);
-export default zodiac;
+const Zodiac = mongoose.model<IZodiac>('Zodiac', zodiacSchema);
+export default Zodiac;

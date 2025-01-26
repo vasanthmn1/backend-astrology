@@ -8,9 +8,9 @@ export class AuthMiddleWare {
     authMiddleWareAction = new AuthMiddleWareAction()
 
     publicAccessMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-        await this.authMiddleWareAction.authaticate(req, res, next, AccessPointEnum.Public)
+        await this.authMiddleWareAction.authenticate(req, res, next, AccessPointEnum.Public)
     }
     privateAccessMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-        await this.authMiddleWareAction.authaticate(req, res, next, AccessPointEnum.Private)
+        await this.authMiddleWareAction.authenticate(req, res, next, AccessPointEnum.Private)
     }
 }   

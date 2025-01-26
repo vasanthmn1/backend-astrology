@@ -1,3 +1,5 @@
+import { DbBasic, DbDate } from "./DbBasic"
+
 export interface IZodiac extends DbBasic, DbDate {
 
     title: string

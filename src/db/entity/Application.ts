@@ -21,6 +21,6 @@ const applicationSchema = new mongoose.Schema<IApplication>({
     updated_date: { type: String, required: true }
 
 });
-const application = mongoose.model<IApplication>('User', applicationSchema);
+const Application = mongoose.model<IApplication>('Application', applicationSchema);
 
-export default application;
+export default Application;
