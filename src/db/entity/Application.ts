@@ -15,6 +15,8 @@ const applicationSchema = new mongoose.Schema<IApplication>({
     phone: _dbUtils.trimString(),
     status: _dbUtils.trimString(),
 
+    available_date: _dbUtils.trimString(),
+
     created_date: { type: String, required: true },
     updated_date: { type: String, required: true }
 

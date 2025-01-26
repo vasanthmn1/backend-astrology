@@ -7,9 +7,9 @@ export interface IUser extends DbBasic, DbDate {
     email: string;
     password: string;
 
-    isDelete: boolean;
+    is_delete: boolean;
 
-    isVerify: boolean;
+    is_verify: boolean;
     verify_code: string;
     block: boolean;
 
