@@ -24,8 +24,12 @@ let configs: IConfig = {
         live: _utils.parseBooleam(env.LIVE)
     },
 
-    secret: {
-        jwt_web: env.JWT_SECRET_WEB
+    secret_key: {
+        jwt_web: env.JWT_SECRET_WEB,
+        private: env.PRIVATE_SECRET_WEB
+    },
+    static_key: {
+        public: _utils.trim(env.PUBLIC_STATIC)
     },
 
     cloudinary: {

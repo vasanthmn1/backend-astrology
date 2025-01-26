@@ -16,7 +16,12 @@ export interface IConfig {
         api_key: string
         api_secret: string
     }
-    secret: {
+
+    secret_key: {
         jwt_web: string  //jwt
+        private: string
+    },
+    static_key: {
+        public: string
     }
 }
