@@ -6,7 +6,7 @@ import { DisplayController } from "../../controller/display/DisplayControler";
 export let _ctrlUtils = {
 
 
-    invoke: (res: Response, req: Request, resultPromise: (authUser: IAuthUser) => Promise<any>, successMsg: string) => {
+    invoke: (req: Request, res: Response, resultPromise: (authUser: IAuthUser) => Promise<any>, successMsg: string) => {
 
         try {
             let auth = res.locals.authUser
@@ -18,7 +18,19 @@ export let _ctrlUtils = {
         } catch (error) {
             DisplayController.getError(req, res, error)
         }
+    },
 
+    invokeAccount: (req: Request, res: Response, resultPromise: () => Promise<any>, successMsg: string) => {
 
+        try {
+
+            let result = resultPromise()
+            let message = successMsg || ""
+
+            DisplayController.getSuccess(req, res, result, message)
+
+        } catch (error) {
+            DisplayController.getError(req, res, error)
+        }
     }
 }

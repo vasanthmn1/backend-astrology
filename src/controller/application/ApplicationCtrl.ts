@@ -11,16 +11,16 @@ export class ApplicationCtl {
     applicationListAction = new ApplicationListAction()
 
 
-    applyForm = (res: Response, req: Request) => {
-        _ctrlUtils.invoke(res, req, async (authUser) => {
+    applyForm = (req: Request, res: Response,) => {
+        _ctrlUtils.invoke(req, res, async (authUser) => {
             let data = req.body || {}
             return this.applicationAction.apply(authUser, data)
         }, "Form Apply Success")
     }
 
     //common _access
-    applications = (res: Response, req: Request) => {
-        _ctrlUtils.invoke(res, req, async (authUser) => {
+    applications = (req: Request, res: Response) => {
+        _ctrlUtils.invoke(req, res, async (authUser) => {
 
             let data = req.body || {}
             return this.applicationListAction.applications(authUser, data)
