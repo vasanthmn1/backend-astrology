@@ -1,5 +1,5 @@
 import express from 'express'
-import { ApplicationCtl } from '../../controller/application/ApplicationCtrl'
+import { ApplicationCtl } from '../controller/application/ApplicationCtrl'
 
 
 let router = express.Router()

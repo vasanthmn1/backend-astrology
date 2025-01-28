@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { ZodiacCtrl } from '../../controller/zodiac/ZodiacCtrl'
+import { ZodiacCtrl } from '../controller/zodiac/ZodiacCtrl'
 
 const routes = express.Router()
 
