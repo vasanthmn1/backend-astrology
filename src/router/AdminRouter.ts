@@ -1,12 +1,14 @@
 import express from 'express'
 
 let router = express.Router()
-
+import ZodiacRoutes from '../router/ZodiacRoutes'
 
 
 
 //list off application
-router.get("/list", )
+router.get("/zodiac", ZodiacRoutes)
+router.get("/application", ZodiacRoutes)
+
 
 
 

@@ -20,5 +20,19 @@ export class ZodiacCtrl {
         }, "Form Apply Success")
     }
 
+    save = (req: Request, res: Response) => {
+        _ctrlUtils.invoke(req, res, async (authUser) => {
+            let data = req.body || {}
+            return this.zodiacAction.save(authUser, data)
+        }, "zodiac delete Success")
+    }
+
+
+    delete = (req: Request, res: Response) => {
+        _ctrlUtils.invoke(req, res, async (authUser) => {
+            let data = req.body || {}
+            return this.zodiacAction.delete(authUser, data)
+        }, "zodiac delete Success")
+    }
 
 }

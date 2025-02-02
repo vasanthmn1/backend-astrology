@@ -27,5 +27,10 @@ export class ApplicationCtl {
         }, "Form Apply Success")
     }
 
+    //flag
+
+    //    approve ,reject,
+
+
 
 }

@@ -21,7 +21,19 @@ export class DbAction<T extends DbBasic> {
             { $set: entityData },
             { upsert: true, 'new': true, runValidators: true }
         )
-
-
     }
+    updateEntity = async (entityData: T) => {
+
+        if (!entityData || !entityData._id) {
+            throw new Error("Invalid data or missing data");
+        }
+
+        return await this.entity.findOneAndUpdate(
+            { _id: entityData._id },
+            { $set: entityData },
+            { upsert: false, 'new': true, runValidators: true }
+        )
+    }
+
+
 }

@@ -12,6 +12,7 @@ const zodiacSchema = new mongoose.Schema<IZodiac>({
     title: { type: String, required: true },
     photo: photoSchema,
     description: { type: String },
+    delete: { type: Boolean, required: true },
 
     created_date: { type: String, required: true },
     updated_date: { type: String, required: true }

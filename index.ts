@@ -5,6 +5,7 @@ import UserRouter from "./src/router/UserRouter";
 import CommonRouter from "./src/router/CommonRouter";
 import { AuthMiddleWare } from "./src/middleware/AuthMiddleWare";
 import AccountRouter from "./src/router/AccountRouter";
+import AdminRouter from "./src/router/AdminRouter";
 
 
 app.get("/", (req, res) => {
@@ -13,10 +14,12 @@ app.get("/", (req, res) => {
 let authMiddleWare = new AuthMiddleWare()
 
 //completed
+
 app.use('/user', UserRouter)
 app.use('/cm', CommonRouter)
-
 app.use('/acc', AccountRouter)
+app.use('/admin', AdminRouter)
+
 
 app.use("/pb", authMiddleWare.publicAccessMiddleware, PublicRouter)
 

@@ -9,7 +9,7 @@ export class List extends HelperChild {
 
     fetchList = async (authUser: IAuthUser, params: ZodiacListParams): Promise<IListResponse<ZodiacRow>> => {
 
-        this.p.validate.listValidateParams(params)
+     //   this.p.validate.listValidateParams(params)
 
         let qry = this.p.qryList.listQry(authUser, params)
 

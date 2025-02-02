@@ -3,7 +3,7 @@ import { DbBasic, DbDate } from "./DbBasic"
 export interface IZodiac extends DbBasic, DbDate {
 
     title: string
-    photo: CLOUDINARYPhoto
+    photo: CloudinaryPhoto
     delete: boolean
     description: string
     created_date: string

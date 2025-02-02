@@ -2,7 +2,7 @@
 import mongoose from "mongoose"
 
 export interface DbBasic {
-    _id: mongoose.Types.ObjectId;
+    _id: string;
 }
 
 export interface DbDate {
