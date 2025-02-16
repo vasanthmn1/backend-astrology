@@ -8,15 +8,21 @@ export let paginationAction = {
         let pageNo = pageNumber;
         let PageL = pageLength;
 
-        if (PageL <= -1) {
-            PageL = 0
+        if (!PageL) {
+            PageL = 10
+        } else if (PageL <= -1) {
+            PageL = 10
         }
 
-        if (pageNo <= -1) {
+        if (!pageNo) {
             pageNo = 0
+        } else if (pageNo <= -1) {
+            pageNo = 0
+        } else {
+            pageNo = (pageNo - 1) * PageL
         }
 
-        pageNo = (pageNo - 1) * PageL
+
 
 
 

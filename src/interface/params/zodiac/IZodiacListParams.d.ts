@@ -6,4 +6,5 @@ export interface ZodiacListParams {
     search: string;
     sortBy: string;
     sortOrder: number;
+    
 }

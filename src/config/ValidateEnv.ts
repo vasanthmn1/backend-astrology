@@ -19,7 +19,7 @@ class ValidateEnv {
             this.addCItem(config.flag.live, "bool", 'live'),
 
             this.addCItem(config.db.mongo_url, "string", 'mongo_url'),
-            this.addCItem(config.secret.jwt_web, "string", 'jwt_web'),
+            this.addCItem(config.secret_key.jwt_web, "string", 'jwt_web'),
 
             this.addCItem(config.cloudinary.name, "string", 'cloudinary name'),
             this.addCItem(config.cloudinary.api_key, "string", 'cloudinary api key'),

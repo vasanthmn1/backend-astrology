@@ -8,9 +8,7 @@ import AccountRouter from "./src/router/AccountRouter";
 import AdminRouter from "./src/router/AdminRouter";
 
 
-app.get("/", (req, res) => {
-    res.send("Get Start App")
-})
+
 let authMiddleWare = new AuthMiddleWare()
 
 //completed
@@ -21,7 +19,10 @@ app.use('/acc', AccountRouter)
 app.use('/admin', AdminRouter)
 
 
-app.use("/pb", authMiddleWare.publicAccessMiddleware, PublicRouter)
+app.use("/pb", PublicRouter) //authMiddleWare.publicAccessMiddleware,
 
+app.get("/", (req, res) => {
+    res.send("Server is running!");
+});
 
 export default app

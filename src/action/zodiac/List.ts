@@ -9,18 +9,19 @@ export class List extends HelperChild {
 
     fetchList = async (authUser: IAuthUser, params: ZodiacListParams): Promise<IListResponse<ZodiacRow>> => {
 
-     //   this.p.validate.listValidateParams(params)
+        //   this.p.validate.listValidateParams(params)
 
         let qry = this.p.qryList.listQry(authUser, params)
 
         let result = await Zodiac.aggregate<IListResponse<ZodiacRow>>(qry)
 
 
+
         if (!result || result.length == 0) {
+
             return {
                 list: [] as any,
                 count: 0,
-                message: "No Data Found"
             }
         }
 

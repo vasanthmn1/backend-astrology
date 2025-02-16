@@ -31,7 +31,7 @@ export class Persist extends HelperChild {
 
     private setDefaultValue = (): IApplication => {
         return {
-            _id: _mongooseUtils.createObjectId(),
+            _id: _mongooseUtils.createObjectId() + "",
             delete: false,
             status: "Pending",
             created_date: _dateUtils.getTimestamp(),

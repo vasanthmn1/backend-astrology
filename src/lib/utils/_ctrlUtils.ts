@@ -6,11 +6,11 @@ import { DisplayController } from "../../controller/display/DisplayControler";
 export let _ctrlUtils = {
 
 
-    invoke: (req: Request, res: Response, resultPromise: (authUser: IAuthUser) => Promise<any>, successMsg: string) => {
+    invoke: async (req: Request, res: Response, resultPromise: (authUser: IAuthUser) => Promise<any>, successMsg: string) => {
 
         try {
             let auth = res.locals.authUser
-            let result = resultPromise(auth)
+            let result = await resultPromise(auth)
             let message = successMsg || ""
 
             DisplayController.getSuccess(req, res, result, message)

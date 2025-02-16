@@ -6,8 +6,8 @@ const routes = express.Router()
 
 let zodiacCtrl = new ZodiacCtrl()
 
-routes.get("/zodiac", ZodiacRoutes)
-routes.get("/zodiac", ZodiacRoutes)
+routes.use("/zodiac", ZodiacRoutes)
+
 
 
 export default routes

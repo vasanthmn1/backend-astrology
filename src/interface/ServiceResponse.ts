@@ -1,6 +1,6 @@
 
 export interface ServiceResponse {
-    data: any
+    result: any
     message: string
     code: number
     status: "success" | "error"

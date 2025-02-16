@@ -17,7 +17,7 @@ export class ZodiacCtrl {
         _ctrlUtils.invoke(req, res, async (authUser) => {
             let data = req.body || {}
             return this.zodiacAction.list.fetchList(authUser, data)
-        }, "Form Apply Success")
+        }, "Zodiac List")
     }
 
     save = (req: Request, res: Response) => {
