@@ -36,7 +36,7 @@ export class Register extends HelperChild {
         user.email = credentials.email
         user.password = hashPassword
         user.access_permission = _static_const.auth.user.access_permission.user
-
+        user.is_delete = false
         await user.save()
 
         if (!user) {

@@ -20,11 +20,11 @@ export let _ctrlUtils = {
         }
     },
 
-    invokeAccount: (req: Request, res: Response, resultPromise: () => Promise<any>, successMsg: string) => {
+    invokeAccount: async (req: Request, res: Response, resultPromise: () => Promise<any>, successMsg: string) => {
 
         try {
 
-            let result = resultPromise()
+            let result = await resultPromise()
             let message = successMsg || ""
 
             DisplayController.getSuccess(req, res, result, message)
