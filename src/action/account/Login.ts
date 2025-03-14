@@ -32,8 +32,7 @@ export class Login extends HelperChild {
             user: {
                 access_permission: user.access_permission,
                 email: user.email,
-                id: user.id
-
+                user_id: user.id
             }
         }
     }

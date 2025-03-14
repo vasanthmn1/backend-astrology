@@ -22,7 +22,7 @@ export class ApplicationListAction {
             return {
                 list: [] as any,
                 count: 0,
-                message: "No applications found"
+                // : "No applications found"
             }
 
         }
